@@ -1,0 +1,8 @@
+{
+  "install": "URL='https://download.sublimetext.com/sublime-text_build-3083_amd64.deb'; FILE=`mktemp`; wget '$URL' -qO $FILE && sudo dpkg -i $FILE; rm $FILE"
+  "config": {
+    "sublime-text-3": {
+      "path": "$HOME/.config/sublime-text-3"
+    }
+  }
+}

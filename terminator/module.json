@@ -1,0 +1,8 @@
+{
+  "install": "sudo apt-get install terminator",
+  "config": {
+    "global": {
+      "path": "$HOME/.config/terminator"
+    }
+  }
+}

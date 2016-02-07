@@ -1,0 +1,22 @@
+[
+    { 
+        "keys": ["alt+;", "<character>"], 
+        "command": "easy_motion",
+        "args": {"select_text": false} 
+    },
+    { 
+        "keys": ["alt+;", "enter"], 
+        "command": "easy_motion",
+        "args": {"select_text": false, "character": "enter"}
+    },
+    { 
+        "keys": ["alt+shift+;", "<character>"], 
+        "command": "easy_motion",
+        "args": {"select_text": true} 
+    },
+    { 
+        "keys": ["alt+shift+;", "enter"], 
+        "command": "easy_motion",
+        "args": {"select_text": true, "character": "enter"}
+    }
+]

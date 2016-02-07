@@ -1,0 +1,17 @@
+{
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		"CVS",
+		"node_modules"
+	],
+	"font_size": 14,
+	"ignored_packages":
+	[
+		"ColorPicker",
+		"Git"
+	],
+	"vintage_start_in_command_mode": true
+}
