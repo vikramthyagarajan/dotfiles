@@ -21,7 +21,7 @@ The dotfiles are split into modules. Each module has 3 important files/folders. 
 - **install.sh**: File which contains the bash script to install the module. If this file exists, then it is the first that is run. However, script to install can also be provided via string or filename in the module.json file. This way, you can have multiple .sh files and link them in the module.json file
 - **module.json**: File which contains the options which specify how the module will be built. See [Configuration](#configuration) for more details
 
-** NOTE:-- all directories named lib/ and docs/ will be ignored as these are used by dotfile framework for different operations **
+** NOTE:-- all directories named lib/, tests/ and docs/ will be ignored as these are used by dotfile framework for different operations **
 
 Hooks are provided at different points for modules in order to run scripts at those times. The hooks are-
 - install
