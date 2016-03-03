@@ -1,6 +1,7 @@
 var test = require('tape');
 var util = require('../lib/util.js');
 var fs = require('fs');
+var _ = require('lodash');
 
 test('it should test runCommands', (tape) => {
   test('it should create temp file', (assert) => {
@@ -90,12 +91,64 @@ test('it should test runFile', (tape) => {
   tape.end();
 });
 
-// test('it should test runCommands', (tape) => {
-  // var test = tape.test;
-  // test('it should create temp folder', (assert) => {
-  // });
+test('it should test readFolder', (tape) => {
+  var gitFiles = ['branches', 'COMMIT_EDITMSG', 'config', 'description',
+'FETCH_HEAD', 'HEAD', 'hooks', 'index', 'info', 'logs', 'objects', 'refs'];
+  test('it should read all files within folder', (assert) => {
+    util.readFolder('.git', function(err, files) {
+      if (err) {
+        assert.fail(err);
+      }
+      assert.equal(gitFiles.length, files.length, 'git folder length matches');
+      assert.end();
+    });
+  });
+  test('it should return correct types of file', (assert) => {
+    util.readFolder('.git', function(err, files) {
+      if (err) {
+        assert.fail(err);
+      }
+      var branchFileObj = _.find(gitFiles, {name: 'branches'});
+      var fetchFileObj = _.find(gitFiles, {name: 'FETCH_HEAD'});
+      assert.doesNotEqual(branchFileObj, null, 'found branches folder');
+      assert.doesNotEqual(fetchFileObj, null, 'found fetch file folder');
+      if (branchFileObj && fetchFileObj) {
+        assert.equal(branchFileObj.type, 'folder', 'branches folder type matches');
+        assert.equal(fetchFileObj.type, 'file', 'fetch file type matches');
+      }
+      assert.end();
+    });
+  });
+  test('it should not allow viewing of folders by absolue path', (assert) => {
+    util.readFolder('/var/www', function(err) {
+      assert.ok(err, 'gives error on absolute path files');
+      assert.end();
+    });
+  });
+  tape.end();
+});
 
-  // test('it should fail on incorrect commands', (assert) => {
-  // });
-  // tape.end();
-// });
+test('it should test symlinkFile', (tape) => {
+  test('it should should symlink a file', (assert) => {
+    util.symlinkFile('package.json', '/tmp/.tmp', function(err) {
+      if (err) {
+        assert.fail(err);
+      }
+      fs.lstat('/tmp/.tmp', function(err, stats) {
+        if (err) {
+          assert.fail(err);
+        }
+        assert.ok(stats.isSymbolicLink(), 'creates symbolic link');
+        fs.unlinkSync('/tmp/.tmp');
+        assert.end();
+      });
+    });
+  });
+  test('it should not symlink files given by absolute path', (assert) => {
+    util.symlinkFile('/tmp/tmp', '/tmp/.tmp', function(err) {
+      assert.ok(err, 'successfully failed on absolute path symlink');
+      assert.end();
+    });
+  });
+  tape.end();
+});
