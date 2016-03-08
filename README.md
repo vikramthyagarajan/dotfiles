@@ -48,9 +48,11 @@ These defaults can be overriden with the module.json file.
       "path": "$HOME/.config" //sets the global path option for the config folder. This means all files in config will by symlinked at this new path
     },
     "filename/foldername": {
-      "path": "$HOME/.config/vim", //file or folder level options within the config folder. These options will apply for filename/foldername
+      "global": {
+        "path": "$HOME/.config/vim", //file or folder level options within the config folder. These options will apply for filename/foldername
+      },
       "symlinks": {
-        "init.vim": "$HOME/.vimrc" //the symlinks option is only available for folders. This makes sure any file that matches the names in the symlinks object will be symlinked to those specific paths.
+        "init": "$HOME/.vimrc" //the symlinks option is only available for folders. This makes sure any file that matches the names in the symlinks object will be symlinked to those specific paths.
       }
     }
   }

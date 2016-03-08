@@ -15,9 +15,11 @@ test('it should test module defaults', (tape) => {
       if (err) {
         assert.fail(err);
       }
-      fs.exists('/tmp/.install', function(exists) {
-        assert.ok(exists);
-      });
+      else {
+        fs.exists('/tmp/.install', function(exists) {
+          assert.ok(exists);
+        });
+      }
       assert.end();
     });
   });
@@ -26,10 +28,9 @@ test('it should test module defaults', (tape) => {
     mod.configure(function (err) {
       if (err) {
         assert.fail(err)
+        return assert.end();
       }
       fs.lstat(path.join(homeDir, '/tmp/.def-sym'), function(err, stats) {
-        console.log('eorrror');
-        console.log(err);
         if (err || !stats) {
           assert.fail(err);
         }
@@ -61,14 +62,70 @@ test('it should call scripts at correct time in lifecycle', (tape) => {
 });
 
 test('it should set read configuration object', (tape) => {
+  var testFolder = "tests/module-tests/configuration"
   test('it should should symlink based on global config', (assert) => {
-    assert.end();
+    var mod = new Module({
+      "config": {
+        "global": {
+          "path": "/tmp/dotfiles/"
+        }
+      }
+    }, path.join(testFolder, 'global-test'));
+    mod.configure(function (err) {
+      if (err) {
+        assert.fail(err);
+      }
+      else {
+        assert.ok(fs.existsSync('/tmp/dotfiles/temp.txt'));
+        fs.unlinkSync('/tmp/dotfiles/temp.txt');
+      }
+      assert.end();
+    });
   });
   test('it should symlink based on filename path override', (assert) => {
-    assert.end();
+    var mod = new Module({
+      "config": {
+        "temp2.txt": {
+          "global": {
+            "path": '/tmp/dotfiles/'
+          }
+        }
+      }
+    }, path.join(testFolder, 'filename-test'));
+    mod.configure(function (err) {
+      if (err) {
+        assert.fail(err);
+      }
+      else {
+        assert.ok(fs.existsSync('/tmp/dotfiles/temp2.txt'));
+        fs.unlinkSync('/tmp/dotfiles/temp2.txt');
+      }
+      assert.end();
+    });
   });
   test('it should symlink based on foldername symlinks field override', (assert) => {
-    assert.end();
+    var mod = new Module({
+      "config": {
+        "testfol": {
+          "symlinks": {
+            "temp3.txt": "/tmp/dotfiles/tmp3",
+            "temp4.txt": "/tmp/dotfiles/tmp4"
+          }
+        }
+      }
+    }, path.join(testFolder, 'foldername-test'));
+    mod.configure(function (err) {
+      if (err) {
+        assert.fail(err);
+      }
+      else {
+        assert.ok(fs.existsSync('/tmp/dotfiles/tmp3'));
+        assert.ok(fs.existsSync('/tmp/dotfiles/tmp4'));
+        fs.unlinkSync('/tmp/dotfiles/tmp3');
+        fs.unlinkSync('/tmp/dotfiles/tmp4');
+      }
+      assert.end();
+    });
   });
   tape.end();
 });
