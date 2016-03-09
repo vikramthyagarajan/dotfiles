@@ -46,17 +46,51 @@ test('it should test module defaults', (tape) => {
 });
 
 test('it should call scripts at correct time in lifecycle', (tape) => {
-  test('it should run install command', (assert) => {
-    assert.end();
-  });
-  test('it should run initialize after install', (assert) => {
-    assert.end();
-  });
-  test('it should run configure before symlinking', (assert) => {
-    assert.end();
+  var testFolder = "tests/module-tests/lifecycle";
+  test('it should run install, init and configure in correct sequence', (assert) => {
+    var mod = new Module({
+      install: 'echo "first" > /tmp/dotfiles/lifecycle.txt',
+      initialize: 'echo "second" > /tmp/dotfiles/lifecycle.txt',
+      configure: 'echo "third" > /tmp/dotfiles/lifecycle.txt'
+    }, null);
+    mod.run(function (err) {
+      if (err) {
+        assert.fail(err);
+        return assert.end();
+      }
+      fs.readFile('/tmp/dotfiles/lifecycle.txt', 'utf8', function(err, fileContents) {
+        if (err) {
+          assert.fail(err);
+        }
+        else if(fileContents) {
+          // removing the first and last \n
+          fileContents = fileContents.replace(/^\n/, "");
+          fileContents = fileContents.replace(/\n$/, "");
+          var words = fileContents.split('\n');
+          assert.equals(words.indexOf("first"), 0);
+          assert.equals(words.indexOf("second"), 1);
+          assert.equals(words.indexOf("third"), 2);
+        }
+        assert.end();
+      });
+    });
   });
   test('it should allow for filenames to be passed in scripts', (assert) => {
-    assert.end();
+    var mod = new Module({
+      install: 'install-new.sh'
+    }, path.join(testFolder, 'filescript'));
+    mod.run(function (err) {
+      if (err) {
+        assert.fail(err);
+        return assert.end();
+      }
+      var isExists = fs.existsSync('/tmp/dotfiles/filescript.txt');
+      assert.ok(isExists);
+      if (isExists) {
+        fs.unlinkSync('/tmp/dotfiles/filescript.txt');
+      }
+      assert.end();
+    });
   });
   tape.end();
 });
@@ -131,11 +165,42 @@ test('it should set read configuration object', (tape) => {
 });
 
 test('it should run submodules', (tape) => {
+  var testFolder = "tests/module-tests/sub-modules";
   test('it should accept submodules specified by inner folders', (assert) => {
-    assert.end();
+    // the inner submodule creates a folder in /tmp/dotfiles/sub1.txt
+    var mod = new Module({}, path.join(testFolder, 'folders'));
+    mod.install(function (err) {
+      if (err) {
+        assert.fail(err);
+        return assert.end();
+      }
+      var isExists = fs.existsSync('/tmp/dotfiles/sub1.txt');
+      assert.ok(isExists);
+      if (isExists) {
+        fs.unlinkSync('/tmp/dotfiles/sub1.txt');
+      }
+      assert.end();
+    });
   });
   test('it should accept submodule by config', (assert) => {
-    assert.end();
+    // the inner submodule creates a folder in /tmp/dotfiles/sub2.txt
+    var mod = new Module({
+      submodules: [{
+        install: 'touch /tmp/dotfiles/sub2.txt'
+      }]
+    }, null);
+    mod.install(function (err) {
+      if (err) {
+        assert.fail(err);
+        return assert.end();
+      }
+      var isExists = fs.existsSync('/tmp/dotfiles/sub2.txt');
+      assert.ok(isExists);
+      if (isExists) {
+        fs.unlinkSync('/tmp/dotfiles/sub2.txt');
+      }
+      assert.end();
+    });
   });
   tape.end();
 });
