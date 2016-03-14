@@ -5,12 +5,12 @@ var _ = require('lodash');
 
 test('it should test runCommands', (tape) => {
   test('it should create temp file', (assert) => {
-    util.runCommands('touch /tmp/dotfiles',
+    util.runCommands('touch /tmp/test',
       function(err) {
         if (err) {
           tape.fail(err);
         }
-        fs.stat('/tmp/dotfiles', function(err, stat) {
+        fs.stat('/tmp/test', function(err, stat) {
           if (err) {
             tape.fail(err);
           }
