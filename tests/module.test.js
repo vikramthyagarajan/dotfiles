@@ -53,8 +53,8 @@ test('it should call scripts at correct time in lifecycle', (tape) => {
   test('it should run install, init and configure in correct sequence', (assert) => {
     var mod = new Module({
       install: 'echo "first" > /tmp/dotfiles/lifecycle.txt',
-      initialize: 'echo "second" > /tmp/dotfiles/lifecycle.txt',
-      configure: 'echo "third" > /tmp/dotfiles/lifecycle.txt'
+      initialize: 'echo "second" >> /tmp/dotfiles/lifecycle.txt',
+      configure: 'echo "third" >> /tmp/dotfiles/lifecycle.txt'
     }, null);
     mod.bootstrap(function (err) {
       if (err) {
