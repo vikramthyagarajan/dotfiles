@@ -1,9 +1,6 @@
 {
   "config": {
     "nvim": {
-      "symlinks": {
-        "init.vim": "$HOME/.vimrc"
-      },
       "path": "$HOME/.config/nvim"
     }
   }
