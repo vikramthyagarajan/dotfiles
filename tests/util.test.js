@@ -152,3 +152,36 @@ test('it should test symlinkFile', (tape) => {
   });
   tape.end();
 });
+
+test('it should test readModuleFile', (tape) => {
+  var utilTestFolder = 'tests/util-tests';
+  test('it should return empty object for fake path', (assert) => {
+    var fakePath = utilTestFolder + '/module-fake.json';
+    util.readModuleFile(fakePath, function(err, moduleConfig) {
+      if (err) {
+        assert.fail(err);
+      }
+      else {
+        assert.deepEqual(moduleConfig, {});
+      }
+      assert.end();
+    });
+  });
+  test('it should return the json object for correct path', (assert) => {
+    var realPath = utilTestFolder + '/module.json';
+    util.readModuleFile(realPath, function(err, moduleConfig) {
+      if (err) {
+        assert.fail(err);
+      }
+      else {
+        assert.deepEqual(moduleConfig, {
+          "install": "echo 'first'> /tmp/dotfiles/indexcycle.txt",
+          "initialize": "echo 'second'> /tmp/dotfiles/indexcycle.txt",
+          "configure": "echo 'third'> /tmp/dotfiles/indexcycle.txt",
+        });
+      }
+      assert.end();
+    });
+  });
+  tape.end();
+});

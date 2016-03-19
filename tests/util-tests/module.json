@@ -1,0 +1,5 @@
+{
+  "install": "echo 'first'> /tmp/dotfiles/indexcycle.txt",
+  "initialize": "echo 'second'> /tmp/dotfiles/indexcycle.txt",
+  "configure": "echo 'third'> /tmp/dotfiles/indexcycle.txt"
+}
