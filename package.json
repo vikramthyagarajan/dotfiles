@@ -4,7 +4,8 @@
   "description": "All of my personal dotfile settings",
   "main": "index.js",
   "scripts": {
-    "test": "tape tests/**/*.js| tap-spec"
+    "test": "tape tests/**/*.js| tap-spec",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
