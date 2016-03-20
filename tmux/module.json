@@ -1,5 +1,6 @@
 {
-  "install" "sudo apt-get install tmux",
+  "install": "sudo apt-get install tmux",
+  "configure": "ln -s ~/.config/tmux ~/tmux"
   "config": {
     "tmux": {
       "path": "$HOME/.config/tmux"

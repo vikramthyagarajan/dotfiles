@@ -12,6 +12,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'xolox/vim-session'
   Plug 'isRuslan/vim-es6'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  Plug 'szw/vim-tags'
+  Plug 'majutsushi/tagbar'
 
   "Journaling etc
   Plug 'xolox/vim-notes'
@@ -27,6 +29,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'terryma/vim-multiple-cursors'
+  Plug 'vim-scripts/Tabmerge'
+  Plug 'christoomey/vim-tmux-navigator'
 
   "Coffescript
   Plug 'kchmck/vim-coffee-script'
@@ -36,6 +40,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'jamescarr/snipmate-nodejs'
   Plug 'jelera/vim-javascript-syntax'
   Plug 'othree/javascript-libraries-syntax.vim'
+
+  " Ruby
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-rails'
+
+  " Markdown
+  Plug 'shime/vim-livedown'
 
   "Bash
   "Plug 'vim-scripts/bash-support.vim'
@@ -76,8 +87,9 @@ set shiftwidth=2
 
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+let b:syntastic_mode="passive"
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
 "Searching options
@@ -102,6 +114,14 @@ let g:EasyGrepFileAssociationsInExplorer=0
 let g:EasyGrepExtraWarnings=0
 let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepReplaceAllPerFile=0
+
+" CtrlP searching. Files/buffers/lines
+let g:ctrlp_extensions = ['line', 'buffertag', 'tag', 'dir']
+nnoremap <Leader>p :CtrlPLine %<CR>
+
+" Tags options
+let g:vim_tags_ignore = ['.gitignore', '.git', 'node_modules', 'tmp', 'docs', '.meteor']
+nmap <F8> :TagbarToggle<CR>
 
 "Searching
 " Modifying grep to ag if available for speed
@@ -161,6 +181,9 @@ let g:used_javascript_libs='underscore,jasmine,chai,jquery'
 "for folding
 set foldmethod=indent
 set foldenable
+set foldlevel=99
+nnoremap <S-h> zc
+nnoremap <S-l> zO
 
 "removes all audible bells
 set visualbell
@@ -169,8 +192,16 @@ autocmd GUIEnter * set vb t_vb=
 
 "settings visual options
 set relativenumber
+set number
 
 "sets the user clipboard as default
 set clipboard=unnamedplus
 
 syntax on
+
+" vim scripts
+function! TestCommandTmux(command)
+  echom '!tmux select-window -t shell;tmux select-pane 1;tmux send-keys "' . a:command . '" Enter;'
+  execute '!tmux select-window -t shell;tmux select-pane 1;tmux send-keys "' . a:command . '" Enter;'
+endf
+nnoremap <Leader>t :call TestCommandTmux('npm test')
