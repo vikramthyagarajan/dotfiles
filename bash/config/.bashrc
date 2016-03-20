@@ -113,15 +113,15 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export NVM_DIR="/home/ptotem/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-export ANDROID_HOME=/home/ptotem/applications/android-sdk-linux/
-
 #setting the meteor package directory for testing local packages
 export PACKAGE_DIRS="$HOME/programmingstuff/meteorstuff/packages"
-
-export BASH_ENV=/home/ptotem/.bashrc
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export NVM_DIR="/Users/vikramthyagarajan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# aliasing vim so that it opens neovim
+alias vim=nvim
