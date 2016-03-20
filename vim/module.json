@@ -1,7 +1,7 @@
 {
   "config": {
     "nvim": {
-      "path": "$HOME/.config/nvim"
+      "path": "$HOME/.config"
     }
   }
 }

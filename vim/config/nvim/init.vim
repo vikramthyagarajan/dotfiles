@@ -93,7 +93,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
 "Searching options
-let g:EasyGrepFileAssociations='/home/ptotem/.vim/plugged/vim-easygrep/plugin/EasyGrepFileAssociations'
 let g:EasyGrepMode=0
 let g:EasyGrepCommand=1
 let g:EasyGrepRecursive=1
