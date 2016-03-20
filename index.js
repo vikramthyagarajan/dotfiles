@@ -27,8 +27,9 @@ Util.readFolder(directory, function(err, files) {
   }
   else {
     // reading the module.json file of the module if exists
-    Util.readModuleFile(foundFile + '/module.json', function(err, moduleConfig) {
-      var mod = new Module(moduleConfig, directory + moduleName);
+    Util.readModuleFile(foundFile.name + '/module.json', function(err, moduleConfig) {
+      console.log('reading module file ', foundFile + '/module.json');
+      var mod = new Module(moduleConfig, directory + '/' + moduleName);
       if (command == 'install') {
         mod.install(function(err){
           if (err) {
