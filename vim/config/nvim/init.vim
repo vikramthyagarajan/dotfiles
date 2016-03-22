@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'editorconfig/editorconfig-vim'
   Plug 'Valloric/YouCompleteMe'
   Plug 'bling/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
   Plug 'Raimondi/delimitMate'
   Plug 'dkprice/vim-easygrep'
   Plug 'xolox/vim-misc'
@@ -56,6 +57,7 @@ call plug#begin('~/.vim/plugged')
 
   " Git plugins
   Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
 
 " Add plugins to &runtimepath
 call plug#end()

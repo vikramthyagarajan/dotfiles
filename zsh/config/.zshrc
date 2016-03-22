@@ -5,7 +5,7 @@ export ZSH=/Users/vikramthyagarajan/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="avit"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,11 +49,11 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm-zsh)
+plugins=(git nvm-zsh brew dircycle npm pip python rails ruby rvm tmux tmuxinator vi-mode wd)
 
 # User configuration
 
-export PATH="/Users/vikramthyagarajan/.nvm/versions/node/v5.9.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/vikramthyagarajan/.rvm/bin"
+export PATH="/Users/vikramthyagarajan/.nvm/versions/node/v5.9.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/vikramthyagarajan/.rvm/bin:/Users/vikramthyagarajan/Library/Python/2.7/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -62,11 +62,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -85,3 +85,12 @@ source $ZSH/oh-my-zsh.sh
 
 # aliasing vim so that it opens neovim
 alias vim=nvim
+
+# setting the powerline options
+if [[ -r ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+  source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
+
+# setting vi mode in zsh
+bindkey -v
+export KEYTIMEOUT=1
