@@ -1,0 +1,7 @@
+{
+  "name": "Solarized dark",
+  "groups": {
+    "internal_ip":              { "fg": "solarized:base3", "bg":"solarized:base01", "attrs": [] },
+    "cpu_load_percent":         { "fg": "solarized:base1", "bg": "solarized:base01", "attrs": [] }
+  }
+}

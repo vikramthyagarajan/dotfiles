@@ -1,0 +1,7 @@
+{
+  "config": {
+    "powerline": {
+      "path": "$HOME/.config"
+    }
+  }
+}
