@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   Plug 'szw/vim-tags'
   Plug 'majutsushi/tagbar'
+  Plug 'tpope/vim-repeat'
 
   "Journaling etc
   Plug 'xolox/vim-notes'
@@ -144,11 +145,18 @@ let g:ycm_min_num_of_chars_for_completion = 1
 " Mappings Begin
 let mapleader = ","
 
-""Simple Split Navigation
-nnoremap <C-j> <C-w><C-j>
-nnoremap <C-h> <C-w><C-h>
-nnoremap <C-k> <C-w><C-k>
-nnoremap <C-l> <C-w><C-l>
+""Split Navigation (synchronised with tmux)
+nnoremap <A-h> <C-w><C-h>
+nnoremap <A-j> <C-w><C-j>
+nnoremap <A-k> <C-w><C-k>
+nnoremap <A-l> <C-w><C-l>
+
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <A-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <A-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <A-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <A-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <A-/> :TmuxNavigatePrevious<cr>
 
 "Easymotion overriding default start key
 nmap <A-;> <Plug>(easymotion-prefix)

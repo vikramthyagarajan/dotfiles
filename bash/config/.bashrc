@@ -117,6 +117,7 @@ fi
 export PACKAGE_DIRS="$HOME/programmingstuff/meteorstuff/packages"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH=/usr/local/bin:$PATH # Setting our local scripts as higher priority than system scripts
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
