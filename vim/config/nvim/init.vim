@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'szw/vim-tags'
   Plug 'majutsushi/tagbar'
   Plug 'tpope/vim-repeat'
+  Plug 'mbbill/undotree'
 
   "Journaling etc
   Plug 'xolox/vim-notes'
@@ -42,6 +43,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jamescarr/snipmate-nodejs'
   Plug 'jelera/vim-javascript-syntax'
   Plug 'othree/javascript-libraries-syntax.vim'
+  Plug 'nikvdp/ejs-syntax'
 
   " Ruby
   Plug 'vim-ruby/vim-ruby'
@@ -170,6 +172,9 @@ nnoremap <Leader>/ :call NERDComment(0,"toggle")<CR>
 vnoremap <Leader>/ :call NERDComment(0,"toggle")<CR>
 let NERDSpaceDelims=1
 
+" Sets the undotree command
+nnoremap <Leader>u :UndotreeToggle<CR>
+
 "For snippets
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -203,8 +208,14 @@ autocmd GUIEnter * set vb t_vb=
 set relativenumber
 set number
 
+" allows mouse scrolling in tmux
+set mouse=a
+
 "sets the user clipboard as default
 set clipboard=unnamedplus
+
+" allow alt backspace to delete word
+imap <M-BS> <C-W>
 
 syntax on
 

@@ -27,10 +27,10 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -83,14 +83,13 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# aliasing vim so that it opens neovim
-alias vim=nvim
-
 # setting the powerline options
 if [[ -r ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
   source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
-# setting vi mode in zsh
-bindkey -v
-export KEYTIMEOUT=1
+[[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
+
+# setting emacs mode in zsh
+bindkey -e
+export KEYTIMEOUT=0
