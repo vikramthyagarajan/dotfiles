@@ -74,7 +74,9 @@ filetype plugin on
 
 "Theming and syntax configurations
 let g:solarized_termtrans=1
-"let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
+" let g:solarized_visibility = "low"
+let g:solarized_contrast = "medium"
 set t_Co=256
 set background=dark
 colorscheme solarized
@@ -214,8 +216,23 @@ set mouse=a
 "sets the user clipboard as default
 set clipboard=unnamedplus
 
+" using different mappings for terminal vim
+set timeout timeoutlen=1000 ttimeoutlen=100
+if !has("gui_running")
+  if &term == "xterm"
+    " set <Home>=^[[H <End>=^[[F <BS>=^?
+    set <S-Up>=^[[1;2A <S-Down>=^[[1;2B <S-Right>=^[[1;2C <S-Left>=^[[1;2D
+  endif
+endif
+
 " allow alt backspace to delete word
 imap <M-BS> <C-W>
+
+" sets up shift direction keymaps
+nmap <silent> <S-Up> gg
+nmap <silent> <S-Down> G
+nmap <silent> <S-Left> gT
+nmap <silent> <S-Right> gt
 
 syntax on
 

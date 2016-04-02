@@ -27,7 +27,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -49,7 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm-zsh brew dircycle npm pip python rails ruby rvm tmux tmuxinator vi-mode wd)
+plugins=(git nvm-zsh brew dircycle npm pip python rails ruby rvm tmux tmuxinator vi-mode extract gem wd mosh project)
 
 # User configuration
 
@@ -84,9 +84,9 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # setting the powerline options
-if [[ -r ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-  source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
+# if [[ -r ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+  # source ~/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+# fi
 
 [[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
 

@@ -6,5 +6,7 @@ export PATH=/usr/local/bin:$PATH # Setting our local scripts as higher priority 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+export DEFAULT_USER="vikramthyagarajan"
+
 # aliasing vim so that it opens neovim
 alias vim=nvim
