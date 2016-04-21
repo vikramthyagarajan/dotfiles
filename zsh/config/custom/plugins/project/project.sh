@@ -154,6 +154,33 @@ project_list_all()
     done <<< $entries
 }
 
+project_warp()
+{
+    local point=$1
+
+    if [[ $point =~ "^\.+$" ]]
+    then
+        if [ $#1 < 2 ]
+        then
+            project_exit_fail "Warping to current directory?"
+        else
+            (( n = $#1 - 1 ))
+            cd -$n > /dev/null
+        fi
+    elif [[ ${points[$point+'.dir']} != "" ]]
+    then
+        project_path=${points[$point+'.dir']/#\~/$HOME}
+        cmd=${points[$point+'.command']}
+        cd $project_path
+        if [[ $cmd != "" ]]
+        then
+          eval $cmd
+        fi
+    else
+        project_exit_fail "Unknown project point '${point}'"
+    fi
+}
+
 local PROJECT_CONFIG=$HOME/.projectrc
 local PROJECT_QUIET=0
 local PROJECT_EXIT_CODE=0
@@ -264,6 +291,7 @@ unset project_add
 unset project_remove
 unset project_list_all
 unset project_print_msg
+unset project_warp
 
 unset args
 unset points

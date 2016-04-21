@@ -56,8 +56,6 @@ plugins=(git nvm-zsh brew dircycle npm pip python rails ruby rvm tmux tmuxinator
 export PATH="/Users/vikramthyagarajan/.nvm/versions/node/v5.9.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/vikramthyagarajan/.rvm/bin:/Users/vikramthyagarajan/Library/Python/2.7/bin/"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -93,3 +91,5 @@ fi
 # setting emacs mode in zsh
 bindkey -e
 export KEYTIMEOUT=0
+
+source $ZSH/oh-my-zsh.sh
