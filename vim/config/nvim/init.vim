@@ -228,6 +228,10 @@ endif
 " allow alt backspace to delete word
 imap <M-BS> <C-W>
 
+" make sure alt d and u works like ctrl d and u
+nmap <M-d> <C-d>
+nmap <M-u> <C-u>
+
 " sets up shift direction keymaps
 nmap <silent> <S-Up> gg
 nmap <silent> <S-Down> G
@@ -241,4 +245,19 @@ function! TestCommandTmux(command)
   echom '!tmux select-window -t shell;tmux select-pane 1;tmux send-keys "' . a:command . '" Enter;'
   execute '!tmux select-window -t shell;tmux select-pane 1;tmux send-keys "' . a:command . '" Enter;'
 endf
+function! TabCloseRight(bang)
+    let cur=tabpagenr()
+    while cur < tabpagenr('$')
+        exe 'tabclose' . a:bang . ' ' . (cur + 1)
+    endwhile
+endfunction
+
+function! TabCloseLeft(bang)
+    while tabpagenr() > 1
+        exe 'tabclose' . a:bang . ' 1'
+    endwhile
+endfunction
+
 nnoremap <Leader>t :call TestCommandTmux('npm test')
+command! -bang Tabcloseright call TabCloseRight('<bang>')
+command! -bang Tabcloseleft call TabCloseLeft('<bang>')
