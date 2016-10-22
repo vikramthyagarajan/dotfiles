@@ -25,6 +25,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'sickill/vim-monokai'
   Plug 'altercation/vim-colors-solarized'
   Plug 'scrooloose/syntastic'
+  Plug 'yggdroot/indentline'
+  Plug 'gregsexton/matchtag'
 
   "Navigation
   Plug 'easymotion/vim-easymotion'
@@ -34,6 +36,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'terryma/vim-multiple-cursors'
   Plug 'vim-scripts/Tabmerge'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'haya14busa/incsearch.vim'
+  Plug 'haya14busa/incsearch-easymotion.vim'
+  Plug 'haya14busa/incsearch-fuzzy.vim'
+  Plug 'reedes/vim-wheel'
+  " Plug 'fergdev/vim-cursor-hist'
 
   "Coffescript
   Plug 'kchmck/vim-coffee-script'
@@ -41,6 +48,8 @@ call plug#begin('~/.vim/plugged')
   "Node and Javascript
   Plug 'moll/vim-node'
   Plug 'jamescarr/snipmate-nodejs'
+  Plug 'deangerber/snipmate-chai'
+  Plug 'mmozuras/snipmate-mocha'
   Plug 'jelera/vim-javascript-syntax'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'nikvdp/ejs-syntax'
@@ -55,8 +64,9 @@ call plug#begin('~/.vim/plugged')
   "Bash
   "Plug 'vim-scripts/bash-support.vim'
 
-  "Html
+  "Html and frontend coding
   Plug 'mattn/emmet-vim'
+  Plug 'hail2u/vim-css3-syntax'
 
   " Git plugins
   Plug 'tpope/vim-fugitive'
@@ -120,6 +130,25 @@ let g:EasyGrepFileAssociationsInExplorer=0
 let g:EasyGrepExtraWarnings=0
 let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepReplaceAllPerFile=0
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+function! s:config_easy_fuzzyall(...) abort
+  return extend(copy({
+  \   'converters': [
+  \     incsearch#config#fuzzy#converter(),
+  \     incsearch#config#fuzzyspell#converter()
+  \   ],
+  \   'modules': [incsearch#config#easymotion#module()],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> z/ incsearch#go(<SID>config_easy_fuzzyall())
+noremap <silent><expr> z? incsearch#go(<SID>config_easy_fuzzyall({'command': '?'}))
+noremap <silent><expr> zg? incsearch#go(<SID>config_easy_fuzzyall({'is_stay': 1}))
 
 " CtrlP searching. Files/buffers/lines
 let g:ctrlp_extensions = ['line', 'buffertag', 'tag', 'dir']
@@ -145,6 +174,10 @@ set incsearch
 
 " Completion
 let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_semantic_triggers =  {
+    \   'css': ['re!:\s+'],
+    \ }
 
 " Mappings Begin
 let mapleader = ","
@@ -165,6 +198,10 @@ nnoremap <silent> <A-/> :TmuxNavigatePrevious<cr>
 "Easymotion overriding default start key
 nmap <A-;> <Plug>(easymotion-prefix)
 vmap <A-;> <Plug>(easymotion-prefix)
+
+"Cursor History Traversal
+nnoremap <A-j> :call g:CursorHistForward()<CR>
+nnoremap <A-k> :call g:CursorHistBack()<CR>
 
 " For NerdTree
 nnoremap <Leader>nerd :NERDTreeToggle<CR>

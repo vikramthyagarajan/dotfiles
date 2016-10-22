@@ -15,7 +15,7 @@ ZSH_THEME="agnoster"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -49,7 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm-zsh brew dircycle npm pip python rails ruby rvm tmux tmuxinator vi-mode extract gem wd mosh project)
+plugins=(git nvm-zsh brew dircycle npm pip python rails ruby rvm tmux tmuxinator vi-mode extract gem wd mosh project docker)
 
 # User configuration
 
@@ -93,3 +93,9 @@ bindkey -e
 export KEYTIMEOUT=0
 
 source $ZSH/oh-my-zsh.sh
+
+# setting options
+# must be after sourcing OMZ, as it sets these options itself
+setopt noincappendhistory
+setopt nosharehistory
+
