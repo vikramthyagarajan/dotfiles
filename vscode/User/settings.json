@@ -1,0 +1,30 @@
+{
+  // Editor settings
+  "editor.cursorBlinking": "solid",
+  "editor.lineNumbers": "relative",
+  "editor.wordWrap": true,
+  "editor.tabCompletion": true,
+
+  // Workbench settings
+  "workbench.editor.enablePreview": false,
+
+  // Window settings
+  "window.showFullPath": true,
+
+  // Files settings
+  "files.hotExit": false,
+
+  // Terminal settings
+  "terminal.external.osxExec": "iTerm.app",
+
+  // Telemetry settings
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+
+  // Vim settings
+  "vim.leader": ",",
+  "vim.useSystemClipboard": true,
+  "vim.useSolidBlockCursor": true,
+  "vim.easymotion": true,
+  "vim.hlsearch": true
+}

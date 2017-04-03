@@ -1,0 +1,18 @@
+[
+	{
+		"label": "HUL_React",
+		"description": "$home/programmingstuff/nodestuff/HUL_React"
+	},
+	{
+		"label": "QuodeckAnalytics",
+		"description": "$home/programmingstuff/nodestuff/QuodeckAnalytics"
+	},
+	{
+		"label": "Quodeck2",
+		"description": "$home/programmingstuff/rubystuff/Quodeck2"
+	},
+	{
+		"label": "VsCodeVim",
+		"description": "$home/programmingstuff/nodestuff/Vim"
+	}
+]

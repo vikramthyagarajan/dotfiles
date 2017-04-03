@@ -1,0 +1,5 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {"key": "alt+l", "command": "workbench.action.focusNextGroup"},
+    {"key": "alt+h", "command": "workbench.action.focusPreviousGroup"}
+]
