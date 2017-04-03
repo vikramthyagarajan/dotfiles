@@ -13,3 +13,6 @@ export DEFAULT_USER="vikramthyagarajan"
 
 # aliasing vim so that it opens neovim
 alias vim=nvim
+
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/build-tools/25.0.0" # Add RVM to PATH for scripting

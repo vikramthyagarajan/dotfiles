@@ -4,7 +4,10 @@ call plug#begin('~/.vim/plugged')
   "General purpose coding features for all languages
   Plug 'scrooloose/nerdcommenter'
   Plug 'editorconfig/editorconfig-vim'
-  Plug 'Valloric/YouCompleteMe'
+  " Plug 'Valloric/YouCompleteMe'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'https://github.com/ternjs/tern_for_vim.git'
   Plug 'bling/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'Raimondi/delimitMate'
@@ -53,6 +56,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'jelera/vim-javascript-syntax'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'nikvdp/ejs-syntax'
+  
+  " React
+  Plug 'mxw/vim-jsx'
+  Plug 'justinj/vim-react-snippets'
 
   " Ruby
   Plug 'vim-ruby/vim-ruby'
@@ -93,6 +100,8 @@ colorscheme solarized
 set ignorecase
 set smartcase
 set laststatus=2
+
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 set tabstop=2
 set expandtab
@@ -173,6 +182,22 @@ endif
 set incsearch
 
 " Completion
+let g:deoplete#enable_at_startup = 1
+" Use deoplete.
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'  " This do disable full signature type on autocomplete
+
+"Add extra filetypes
+let g:tern#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ '...'
+                \ ]
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
+let g:ycm_server_log_level = 'debug'
 let g:ycm_min_num_of_chars_for_completion = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_semantic_triggers =  {
@@ -200,8 +225,8 @@ nmap <A-;> <Plug>(easymotion-prefix)
 vmap <A-;> <Plug>(easymotion-prefix)
 
 "Cursor History Traversal
-nnoremap <A-j> :call g:CursorHistForward()<CR>
-nnoremap <A-k> :call g:CursorHistBack()<CR>
+" nnoremap <A-j> :call g:CursorHistForward()<CR>
+" nnoremap <A-k> :call g:CursorHistBack()<CR>
 
 " For NerdTree
 nnoremap <Leader>nerd :NERDTreeToggle<CR>
